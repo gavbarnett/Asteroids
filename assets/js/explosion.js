@@ -30,8 +30,10 @@ function Explosion(pos) {
         for (var i = 0; i < this.dust.length; i++) {
             ctx.beginPath();
             ctx.arc(this.dust[i].x, this.dust[i].y, 1, 0, 2 * Math.PI, false)
-            ctx.strokeStyle = '#44bbbb';
+            ctx.strokeStyle = '#bbbbbb';
             ctx.lineWidth = 1;
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 40;
             ctx.stroke();
         }
     }

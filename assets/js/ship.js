@@ -99,12 +99,11 @@ function Ship(pos, heading) {
         }
         ctx.closePath();
         ctx.fillStyle = '#000000';
-        ctx.fill();
-        ctx.strokeStyle = '#00ffff';
-        ctx.lineWidth = 2.5;
-        ctx.stroke();
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 1.5;
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 5;
+        ctx.fill();
         ctx.stroke();
         if (this.heading.acceleration > 0.01) {
             ctx.beginPath();
@@ -116,11 +115,10 @@ function Ship(pos, heading) {
         }
         ctx.fillStyle = '#000000';
         ctx.fill();
-        ctx.strokeStyle = '#00ffff';
-        ctx.lineWidth = 3;
-        ctx.stroke();
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = 0;
         ctx.stroke();
     }
 }

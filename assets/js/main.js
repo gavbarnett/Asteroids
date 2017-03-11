@@ -28,7 +28,9 @@ var myGameArea = {
         ships[0] = new Ship;
     },
     clear: function() {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.fillStyle = 'rgba(0, 0, 0, 0.4)';
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        //this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }
 
@@ -57,7 +59,7 @@ function updateGameArea() {
                     console.log("Score: " + points);
                     explosions.push(new Explosion(asteroids[i].pos));
                     asteroids.splice(i, 1);
-                    bullets[j].age = 100;
+                    bullets[j].age = 10000;
                     break;
                 }
             }
@@ -92,7 +94,7 @@ function updateGameArea() {
     }
     for (len = bullets.length, i = (len - 1); i >= 0; i--) {
         bullets[i].draw();
-        if (bullets[i].age > (0.2 * Math.pow((canvassize.x * canvassize.Y, 0.5) / bullets[i].bulletspeed))) {
+        if (bullets[i].age > (0.7 * Math.pow(canvassize.x * canvassize.y, 0.5) / bullets[i].bulletspeed)) {
             bullets.splice(i, 1);
         }
     }
@@ -105,6 +107,7 @@ function updateGameArea() {
 
     //Score Board
     var ctx = myGameArea.context;
+    ctx.shadowBlur = 0;
     ctx.font = "30px Arial";
     ctx.textAlign = "left";
     ctx.fillStyle = '#aaaaaa';

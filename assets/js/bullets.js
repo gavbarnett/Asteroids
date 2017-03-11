@@ -37,7 +37,7 @@ function Bullet(pos, heading) {
     this.speed.y = this.bulletspeed * Math.sin(this.heading.ang);
     this.age = 1;
     this.update = function() {
-        this.age += 0.1;
+        this.age += 1;
         this.pos.x = this.pos.x + this.speed.x;
         this.pos.y = this.pos.y + this.speed.y;
         if (this.pos.x > canvassize.x) {
@@ -64,10 +64,9 @@ function Bullet(pos, heading) {
             ctx.lineTo(this.pos.x + XY.x, this.pos.y + XY.y);
             ctx.closePath();
         }
-        ctx.strokeStyle = '#00ffff';
-        ctx.lineWidth = 3;
-        ctx.stroke();
-        ctx.strokeStyle = '#ffffff';
+        ctx.shadowColor = '#00ffff';
+        ctx.shadowBlur = 20;
+        ctx.strokeStyle = '#00dddd';
         ctx.lineWidth = 2;
         ctx.stroke();
     }

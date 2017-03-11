@@ -83,11 +83,10 @@ function Asteroid(r, pos, heading) {
             ctx.lineTo(this.poly[i].x, this.poly[i].y);
         }
         ctx.closePath();
-        ctx.strokeStyle = '#44bbbb';
-        ctx.lineWidth = 2;
-        ctx.stroke();
         ctx.strokeStyle = '#bbbbbb';
         ctx.lineWidth = 1.5;
+        ctx.shadowColor = '#dddddd';
+        ctx.shadowBlur = 10;
         ctx.stroke();
     }
 }

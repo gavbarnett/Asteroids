@@ -32,9 +32,9 @@ function Bullet(pos, heading) {
         this.heading.ang = 0;
     }
     this.speed = [];
-    var bulletspeed = 15;
-    this.speed.x = bulletspeed * Math.cos(this.heading.ang);
-    this.speed.y = bulletspeed * Math.sin(this.heading.ang);
+    this.bulletspeed = 25;
+    this.speed.x = this.bulletspeed * Math.cos(this.heading.ang);
+    this.speed.y = this.bulletspeed * Math.sin(this.heading.ang);
     this.age = 1;
     this.update = function() {
         this.age += 0.1;

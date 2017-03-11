@@ -37,23 +37,29 @@ function updateGameArea() {
     for (len = asteroids.length, i = (len - 1); i >= 0; i--) {
         asteroids[i].draw();
         for (len = bullets.length, j = (len - 1); j >= 0; j--) {
-            if (cn_PnPoly(bullets[j].pos, asteroids[i].poly) == 1) {
-                if (asteroids[i].r > 16) {
-                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
-                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
+            for (k = 0; k < bullets[j].bulletspeed / 2; k++) {
+                var POS = [];
+                POS.x = bullets[j].pos.x - bullets[j].speed.x / (bullets[j].bulletspeed / 2) * k;
+                POS.y = bullets[j].pos.y - bullets[j].speed.y / (bullets[j].bulletspeed / 2) * k;
+                if (cn_PnPoly(POS, asteroids[i].poly) == 1) {
+                    if (asteroids[i].r > 16) {
+                        asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
+                        asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
+                    }
+                    var snd1 = new Audio();
+                    var src1 = document.createElement("source");
+                    src1.type = "audio/mpeg";
+                    src1.src = "assets/SFX/RockHit.mp3";
+                    snd1.appendChild(src1);
+                    snd1.play();
+                    points = points + Math.round(1 / asteroids[i].r * 200);
+                    console.clear();
+                    console.log("Score: " + points);
+                    explosions.push(new Explosion(asteroids[i].pos));
+                    asteroids.splice(i, 1);
+                    bullets[j].age = 100;
+                    break;
                 }
-                var snd1 = new Audio();
-                var src1 = document.createElement("source");
-                src1.type = "audio/mpeg";
-                src1.src = "assets/SFX/RockHit.mp3";
-                snd1.appendChild(src1);
-                snd1.play();
-                points = points + Math.round(1 / asteroids[i].r * 200);
-                console.clear();
-                console.log("Score: " + points);
-                explosions.push(new Explosion(asteroids[i].pos));
-                asteroids.splice(i, 1);
-                bullets[j].age = 100;
             }
         }
     }

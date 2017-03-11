@@ -41,7 +41,6 @@ function updateGameArea() {
                 if (asteroids[i].r > 16) {
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
-                    explosions.push(new Explosion(asteroids[i].pos));
                 }
                 var snd1 = new Audio();
                 var src1 = document.createElement("source");
@@ -52,6 +51,7 @@ function updateGameArea() {
                 points = points + Math.round(1 / asteroids[i].r * 200);
                 console.clear();
                 console.log("Score: " + points);
+                explosions.push(new Explosion(asteroids[i].pos));
                 asteroids.splice(i, 1);
                 bullets[j].age = 100;
             }

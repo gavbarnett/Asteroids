@@ -19,7 +19,9 @@ document.addEventListener("keydown", function(event) {
             break;
         case 32: //space
             // code for "right arrow" key press.
-            bullets.push(new Bullet(ships[0].pos, ships[0].heading));
+            if (bullets.length < 10) {
+                bullets.push(new Bullet(ships[0].pos, ships[0].heading));
+            }
             break;
         default:
             return; // Quit when this doesn't handle the key event.

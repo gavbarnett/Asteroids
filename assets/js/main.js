@@ -13,6 +13,8 @@ function startGame() {
 var myGameArea = {
     canvas: document.createElement("canvas"),
     start: function() {
+        canvassize.x = window.innerWidth;
+        canvassize.y = window.innerHeight;
         this.canvas.width = canvassize.x;
         this.canvas.height = canvassize.y;
         this.context = this.canvas.getContext("2d");
@@ -35,7 +37,7 @@ function updateGameArea() {
         asteroids[i].draw();
         for (len = bullets.length, j = (len - 1); j >= 0; j--) {
             if (cn_PnPoly(bullets[j].pos, asteroids[i].poly) == 1) {
-                if (asteroids[i].r > 10) {
+                if (asteroids[i].r > 16) {
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
                 }
@@ -53,15 +55,29 @@ function updateGameArea() {
             }
         }
     }
+    if (asteroids.length < 2) {
+        asteroids.push(new Asteroid);
+    }
     for (var i = 0, len = ships.length; i < len; i++) {
         ships[i].draw();
         for (var k = 0; k < ships[i].poly.length; k++) {
             for (var lena = asteroids.length, j = (lena - 1); j >= 0; j--) {
                 if (cn_PnPoly(ships[i].poly[k], asteroids[j].poly) == 1) {
+                    var snd2 = new Audio();
+                    var src2 = document.createElement("source");
+                    src2.type = "audio/mpeg";
+                    src2.src = "assets/SFX/Crash.mp3";
+                    snd2.appendChild(src2);
+                    snd2.play();
                     console.clear();
                     console.log("Score: " + points);
                     console.log("You were hit by a massive space rock!");
                     clearInterval(myGameArea.interval);
+                    var ctx = myGameArea.context;
+                    ctx.font = "30px Arial";
+                    ctx.textAlign = "center";
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillText("Refresh to replay", canvassize.x / 2, canvassize.y / 2);
                 }
             }
         }
@@ -72,4 +88,10 @@ function updateGameArea() {
             bullets.splice(i, 1);
         }
     }
+    //Score Board
+    var ctx = myGameArea.context;
+    ctx.font = "30px Arial";
+    ctx.textAlign = "left";
+    ctx.fillStyle = '#aaaaaa';
+    ctx.fillText("Score: " + points, 10, 50);
 }

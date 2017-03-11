@@ -57,7 +57,7 @@ function updateGameArea() {
             }
         }
     }
-    if (asteroids.length < 2) {
+    if (asteroids.length < 5) {
         asteroids.push(new Asteroid);
     }
     for (var i = 0, len = ships.length; i < len; i++) {
@@ -86,7 +86,7 @@ function updateGameArea() {
     }
     for (len = bullets.length, i = (len - 1); i >= 0; i--) {
         bullets[i].draw();
-        if (bullets[i].age > 15) {
+        if (bullets[i].age > 7) {
             bullets.splice(i, 1);
         }
     }

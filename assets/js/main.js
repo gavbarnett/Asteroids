@@ -22,7 +22,7 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.interval = setInterval(updateGameArea, 20);
 
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < (canvassize.y * canvassize.x) / 50000; i++) {
             asteroids[i] = new Asteroid;
         }
         ships[0] = new Ship;
@@ -63,7 +63,7 @@ function updateGameArea() {
             }
         }
     }
-    if (asteroids.length < 5) {
+    if (asteroids.length < ((canvassize.y * canvassize.x) / 50000)) {
         asteroids.push(new Asteroid);
     }
     for (var i = 0, len = ships.length; i < len; i++) {
@@ -92,7 +92,7 @@ function updateGameArea() {
     }
     for (len = bullets.length, i = (len - 1); i >= 0; i--) {
         bullets[i].draw();
-        if (bullets[i].age > 7) {
+        if (bullets[i].age > (0.2 * Math.pow((canvassize.x * canvassize.Y, 0.5) / bullets[i].bulletspeed))) {
             bullets.splice(i, 1);
         }
     }
@@ -104,6 +104,12 @@ function updateGameArea() {
     }
 
     //Score Board
+    var ctx = myGameArea.context;
+    ctx.font = "30px Arial";
+    ctx.textAlign = "left";
+    ctx.fillStyle = '#aaaaaa';
+    ctx.fillText("Score: " + points, 10, 50);
+
     var ctx = myGameArea.context;
     ctx.font = "30px Arial";
     ctx.textAlign = "left";

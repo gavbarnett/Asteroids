@@ -2,6 +2,13 @@ function Bullet(pos, heading) {
     //r = radius (size)
     //pos = [x,y] starting coordinate
     //heading = [x,y] direction & speed
+    var snd1 = new Audio();
+    var src1 = document.createElement("source");
+    src1.type = "audio/mpeg";
+    src1.src = "assets/SFX/Lasers.mp3";
+    snd1.appendChild(src1);
+    snd1.play();
+
     this.pos = [];
     if (pos) {
         this.pos.x = pos.x;

@@ -13,8 +13,13 @@ function Asteroid(r, pos, heading) {
         this.pos.x = pos.x;
         this.pos.y = pos.y;
     } else {
-        this.pos.x = Math.random() * 500;
-        this.pos.y = Math.random() * 500;
+        if (Math.random() > 0.5) {
+            this.pos.x = canvassize.x * Math.round(Math.random());
+            this.pos.y = Math.random() * canvassize.y;
+        } else {
+            this.pos.x = Math.random() * canvassize.x;
+            this.pos.y = canvassize.y * Math.round(Math.random());
+        }
     }
     this.shape = [];
     var points = 4 + Math.random() * 6;

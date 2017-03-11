@@ -39,6 +39,12 @@ function updateGameArea() {
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
                     asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
                 }
+                var snd1 = new Audio();
+                var src1 = document.createElement("source");
+                src1.type = "audio/mpeg";
+                src1.src = "assets/SFX/RockHit.mp3";
+                snd1.appendChild(src1);
+                snd1.play();
                 points = points + Math.round(1 / asteroids[i].r * 200);
                 console.clear();
                 console.log("Score: " + points);
@@ -67,59 +73,3 @@ function updateGameArea() {
         }
     }
 }
-
-document.addEventListener("keydown", function(event) {
-    if (event.defaultPrevented) {
-        return; // Do nothing if the event was already processed
-    }
-
-    switch (event.keyCode) {
-        case 83: //down
-            //  ships[0].heading.acceleration = -0.1;
-            break;
-        case 87: //up
-            ships[0].heading.acceleration = 0.1;
-            break;
-        case 65: //left
-            ships[0].heading.rotation = -Math.PI / 50;
-            break;
-        case 68: //right
-            // code for "right arrow" key press.
-            ships[0].heading.rotation = +Math.PI / 50;
-            break;
-        case 32: //space
-            // code for "right arrow" key press.
-            bullets.push(new Bullet(ships[0].pos, ships[0].heading));
-            break;
-        default:
-            return; // Quit when this doesn't handle the key event.
-    }
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-}, true);
-
-document.addEventListener("keyup", function(event) {
-    if (event.defaultPrevented) {
-        return; // Do nothing if the event was already processed
-    }
-    switch (event.keyCode) {
-        case 83:
-            //      ships[0].heading.acceleration = 0;
-            break;
-        case 87:
-            ships[0].heading.acceleration = 0;
-            break;
-        case 65: //left
-            ships[0].heading.rotation = 0;
-            break;
-        case 68: //right
-            // code for "right arrow" key press.
-            ships[0].heading.rotation = 0;
-            break;
-        default:
-            return; // Quit when this doesn't handle the key event.
-    }
-
-    // Cancel the default action to avoid it being handled twice
-    event.preventDefault();
-}, true);

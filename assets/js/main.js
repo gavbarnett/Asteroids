@@ -2,6 +2,7 @@ var asteroids = [];
 var ships = [];
 var canvassize = [];
 var bullets = [];
+var explosions = [];
 var points = 0;
 canvassize.x = 500;
 canvassize.y = 500;
@@ -38,8 +39,9 @@ function updateGameArea() {
         for (len = bullets.length, j = (len - 1); j >= 0; j--) {
             if (cn_PnPoly(bullets[j].pos, asteroids[i].poly) == 1) {
                 if (asteroids[i].r > 16) {
-                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
-                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos))
+                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
+                    asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
+                    explosions.push(new Explosion(asteroids[i].pos));
                 }
                 var snd1 = new Audio();
                 var src1 = document.createElement("source");
@@ -84,10 +86,17 @@ function updateGameArea() {
     }
     for (len = bullets.length, i = (len - 1); i >= 0; i--) {
         bullets[i].draw();
-        if (bullets[i].age > 10) {
+        if (bullets[i].age > 15) {
             bullets.splice(i, 1);
         }
     }
+    for (len = explosions.length, i = (len - 1); i >= 0; i--) {
+        explosions[i].draw();
+        if (explosions[i].age > 10) {
+            explosions.splice(i, 1);
+        }
+    }
+
     //Score Board
     var ctx = myGameArea.context;
     ctx.font = "30px Arial";

@@ -56,8 +56,8 @@ function Ship(pos, heading) {
         if (this.speed.y < -speedlimit) {
             this.speed.y = -speedlimit;
         };
-        this.speed.x *= 0.99;
-        this.speed.y *= 0.99;
+        this.speed.x *= 0.999;
+        this.speed.y *= 0.999;
     }
 
     this.update = function() {

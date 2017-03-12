@@ -5,7 +5,7 @@ function Asteroid(r, pos, heading) {
     if (r) {
         this.r = r;
     } else {
-        var r_init = 30;
+        var r_init = 40;
         this.r = r_init + Math.random() * r_init * 0.5;
     }
     this.pos = [];
@@ -47,6 +47,7 @@ function Asteroid(r, pos, heading) {
         this.speed.x = Math.random() * init_speed * Math.cos(this.heading.ang);
         this.speed.y = Math.random() * init_speed * Math.sin(this.heading.ang);
     }
+
     this.speedupdate = function() {
         this.heading.ang += this.heading.rotation;
         var speedlimit = 10;

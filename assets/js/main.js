@@ -36,13 +36,14 @@ var myGameArea = {
 
 function updateGameArea() {
     myGameArea.clear();
-    for (len = asteroids.length, i = (len - 1); i >= 0; i--) {
+    for (var len = asteroids.length, i = (len - 1); i >= 0; i--) {
         asteroids[i].draw();
-        for (len = bullets.length, j = (len - 1); j >= 0; j--) {
-            for (k = 0; k < bullets[j].bulletspeed / 2; k++) {
+        for (var len = bullets.length, j = (len - 1); j >= 0; j--) {
+            for (var k = 0; k < bullets[j].bulletspeed / 2; k++) {
                 var POS = [];
                 POS.x = bullets[j].pos.x - bullets[j].speed.x / (bullets[j].bulletspeed / 2) * k;
                 POS.y = bullets[j].pos.y - bullets[j].speed.y / (bullets[j].bulletspeed / 2) * k;
+                //console.log(i);
                 if (cn_PnPoly(POS, asteroids[i].poly) == 1) {
                     if (asteroids[i].r > 16) {
                         asteroids.push(new Asteroid(asteroids[i].r / 2, asteroids[i].pos));
@@ -55,12 +56,14 @@ function updateGameArea() {
                     snd1.appendChild(src1);
                     snd1.play();
                     points = points + Math.round(1 / asteroids[i].r * 200);
-                    console.clear();
+                    //console.clear();
                     console.log("Score: " + points);
                     explosions.push(new Explosion(asteroids[i].pos));
                     asteroids.splice(i, 1);
+                    k = bullets[j].bulletspeed;
+                    j = 0;
                     bullets[j].age = 10000;
-                    break;
+
                 }
             }
         }
@@ -79,7 +82,7 @@ function updateGameArea() {
                     src2.src = "assets/SFX/Crash.mp3";
                     snd2.appendChild(src2);
                     snd2.play();
-                    console.clear();
+                    //console.clear();
                     console.log("Score: " + points);
                     console.log("You were hit by a massive space rock!");
                     clearInterval(myGameArea.interval);

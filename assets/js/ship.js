@@ -58,6 +58,7 @@ function Ship(pos, heading) {
         };
         this.speed.x *= 0.999;
         this.speed.y *= 0.999;
+        this.heading.rotation *= 0.999;
     }
 
     this.update = function() {

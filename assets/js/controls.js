@@ -11,11 +11,15 @@ document.addEventListener("keydown", function(event) {
             ships[0].heading.acceleration = 0.1;
             break;
         case 65: //left
-            ships[0].heading.rotation = -Math.PI / 50;
+            if (ships[0].heading.rotation > -0.1) {
+                ships[0].heading.rotation -= Math.PI / 200;
+            }
             break;
         case 68: //right
             // code for "right arrow" key press.
-            ships[0].heading.rotation = +Math.PI / 50;
+            if (ships[0].heading.rotation < 0.1) {
+                ships[0].heading.rotation += Math.PI / 200;
+            }
             break;
         case 32: //space
             // code for "right arrow" key press.
@@ -42,11 +46,11 @@ document.addEventListener("keyup", function(event) {
             ships[0].heading.acceleration = 0;
             break;
         case 65: //left
-            ships[0].heading.rotation = 0;
+            //ships[0].heading.rotation = 0;
             break;
         case 68: //right
             // code for "right arrow" key press.
-            ships[0].heading.rotation = 0;
+            //ships[0].heading.rotation = 0;
             break;
         default:
             return; // Quit when this doesn't handle the key event.

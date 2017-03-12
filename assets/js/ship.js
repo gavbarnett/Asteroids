@@ -44,20 +44,20 @@ function Ship(pos, heading) {
         var speedlimit = 10;
         this.speed.x += this.heading.acceleration * Math.cos(this.heading.ang);
         if (this.speed.x > speedlimit) {
-            this.speed.x = speedlimit
+            this.speed.x = speedlimit;
         };
         if (this.speed.x < -speedlimit) {
-            this.speed.x = -speedlimit
+            this.speed.x = -speedlimit;
         };
         this.speed.y += this.heading.acceleration * Math.sin(this.heading.ang);
         if (this.speed.y > speedlimit) {
-            this.speed.y = speedlimit
+            this.speed.y = speedlimit;
         };
         if (this.speed.y < -speedlimit) {
-            this.speed.y = -speedlimit
+            this.speed.y = -speedlimit;
         };
-        this.speed.x *= 0.99
-        this.speed.y *= 0.99
+        this.speed.x *= 0.99;
+        this.speed.y *= 0.99;
     }
 
     this.update = function() {

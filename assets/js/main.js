@@ -56,7 +56,7 @@ function updateGameArea() {
                     snd1.appendChild(src1);
                     snd1.play();
                     points = points + Math.round(1 / asteroids[i].r * 200);
-                    //console.clear();
+                    console.clear();
                     console.log("Score: " + points);
                     explosions.push(new Explosion(asteroids[i].pos));
                     asteroids.splice(i, 1);
@@ -82,7 +82,7 @@ function updateGameArea() {
                     src2.src = "assets/SFX/Crash.mp3";
                     snd2.appendChild(src2);
                     snd2.play();
-                    //console.clear();
+                    console.clear();
                     console.log("Score: " + points);
                     console.log("You were hit by a massive space rock!");
                     clearInterval(myGameArea.interval);

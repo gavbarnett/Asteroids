@@ -6,6 +6,7 @@ var explosions = [];
 var points = 0;
 canvassize.x = 500;
 canvassize.y = 500;
+paused = false;
 
 function startGame() {
     myGameArea.start();
@@ -20,7 +21,7 @@ var myGameArea = {
         this.canvas.height = canvassize.y;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
+        updateGameArea();
 
         for (var i = 0; i < (canvassize.y * canvassize.x) / 50000; i++) {
             asteroids[i] = new Asteroid;
@@ -35,6 +36,11 @@ var myGameArea = {
 }
 
 function updateGameArea() {
+    if (!paused) {
+        requestAnimationFrame(updateGameArea);
+    } else {
+        return false;
+    }
     myGameArea.clear();
     for (var len = asteroids.length, i = (len - 1); i >= 0; i--) {
         asteroids[i].draw();
@@ -85,7 +91,7 @@ function updateGameArea() {
                     console.clear();
                     console.log("Score: " + points);
                     console.log("You were hit by a massive space rock!");
-                    clearInterval(myGameArea.interval);
+                    paused = true;
                     var ctx = myGameArea.context;
                     ctx.font = "30px Arial";
                     ctx.textAlign = "center";
